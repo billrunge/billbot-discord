@@ -10,7 +10,7 @@ client = discord.Client()
 
 emoji_letters = {
     "A": "🇦",
-    "B": "🇧",
+    "B": "🅱️",
     "C": "🇨",
     "D": "🇩",
     "E": "🇪",
