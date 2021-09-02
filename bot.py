@@ -7,6 +7,7 @@ from collections import Counter
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+CHANNEL = os.getenv('DISCORD_CHANNEL_ID')
 
 client = discord.Client()
 
@@ -69,10 +70,11 @@ def getLongestWordWithDistinctLetters(word_array):
 
 @client.event
 async def on_message(message):
-    split_message = message.content.split()
-    emoji_word = getLongestWordWithDistinctLetters(split_message)
-    if len(emoji_word) > 4 and len(emoji_word) < 21:
-        for letter in emoji_word:
-            await message.add_reaction(emoji_letters[letter])
+    if str(message.channel.id) == CHANNEL:
+        split_message = message.content.split()
+        emoji_word = getLongestWordWithDistinctLetters(split_message)
+        if len(emoji_word) > 4 and len(emoji_word) < 21:
+            for letter in emoji_word:
+                await message.add_reaction(emoji_letters[letter])
 
 client.run(TOKEN)
