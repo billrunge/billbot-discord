@@ -3,6 +3,7 @@ import os
 import discord
 from dotenv import load_dotenv
 from collections import Counter
+from distutils.util import strtobool
 
 load_dotenv()
 client = discord.Client()
@@ -57,13 +58,19 @@ def getLongestWordWithDistinctLetters(word_array):
     return longest_word
 
 
+async def parseMessageAddEmoji(message):
+    split_message = message.content.split()
+    emoji_word = getLongestWordWithDistinctLetters(split_message)
+    if len(emoji_word) >= int(os.getenv('MIN_WORD_LENGTH')) and len(emoji_word) <= int(os.getenv('MAX_WORD_LENGTH')):
+        for letter in emoji_word:
+            await message.add_reaction(emoji_letters[letter])
+
+
 @client.event
 async def on_message(message):
-    if str(message.channel.id) == os.getenv('CHANNEL_ID'):
-        split_message = message.content.split()
-        emoji_word = getLongestWordWithDistinctLetters(split_message)
-        if len(emoji_word) > 4 and len(emoji_word) < 21:
-            for letter in emoji_word:
-                await message.add_reaction(emoji_letters[letter])
+    if bool(strtobool(os.getenv('CHANNEL_LIMITED'))) and str(message.channel.id) == os.getenv('CHANNEL_ID'):
+        await parseMessageAddEmoji(message)
+    if not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
+        await parseMessageAddEmoji(message)
 
 client.run(os.getenv('TOKEN'))
