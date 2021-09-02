@@ -47,9 +47,7 @@ emoji_letters = {
 
 
 def isUniqueChars(string):
-
     freq = Counter(string)
-
     if(len(freq) == len(string)):
         return True
     else:
