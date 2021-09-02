@@ -1,20 +1,11 @@
 # bot.py
 import os
-
 import discord
 from dotenv import load_dotenv
 from collections import Counter
 
 load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
-CHANNEL = os.getenv('DISCORD_CHANNEL_ID')
-
 client = discord.Client()
-
-intents = discord.Intents.none()
-intents.reactions = True
-intents.members = True
-intents.guilds = True
 
 emoji_letters = {
     "A": "🇦",
@@ -68,11 +59,11 @@ def getLongestWordWithDistinctLetters(word_array):
 
 @client.event
 async def on_message(message):
-    if str(message.channel.id) == CHANNEL:
+    if str(message.channel.id) == os.getenv('CHANNEL_ID'):
         split_message = message.content.split()
         emoji_word = getLongestWordWithDistinctLetters(split_message)
         if len(emoji_word) > 4 and len(emoji_word) < 21:
             for letter in emoji_word:
                 await message.add_reaction(emoji_letters[letter])
 
-client.run(TOKEN)
+client.run(os.getenv('TOKEN'))
