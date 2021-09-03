@@ -13,4 +13,3 @@ async def execute(message):
         await message.channel.send(file=discord.File(objection_img))
     elif ('OBJECTION' in message.content.upper()) and not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
         await message.channel.send(file=discord.File(objection_img))
-

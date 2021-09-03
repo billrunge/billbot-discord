@@ -1,7 +1,7 @@
 # bot.py
 import os
 import discord
-from on_message import *
+from on_message import * 
 from dotenv import load_dotenv
 from importlib.machinery import SourceFileLoader
 
