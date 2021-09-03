@@ -66,7 +66,7 @@ async def covertImageToAscii(fileUrl, cols, scale, moreLevels):
 async def messageToAscii(message):
     if len(message.attachments) > 0:
         for attachment in message.attachments:
-            aimg = await covertImageToAscii(attachment.url, 60, 0.43, True)
+            aimg = await covertImageToAscii(attachment.url, 40, 0.43, True)
             ascii_image = ''
             for row in aimg:
                 ascii_image += f'`{row}`\n'
