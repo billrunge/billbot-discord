@@ -1,6 +1,7 @@
 # emoji_letters.py
 import os
 import discord
+from distutils.util import strtobool
 from dotenv import load_dotenv
 from collections import Counter
 
@@ -54,9 +55,16 @@ def getLongestWordWithDistinctLetters(word_array):
             longest_length = len(word)
     return longest_word    
 
-async def execute(message):
+async def parseMessageAddEmoji(message):
     split_message = message.content.split()
     emoji_word = getLongestWordWithDistinctLetters(split_message)
     if len(emoji_word) >= int(os.getenv('MIN_WORD_LENGTH')) and len(emoji_word) <= int(os.getenv('MAX_WORD_LENGTH')):
         for letter in emoji_word:
             await message.add_reaction(emoji_letter_dict[letter])
+
+
+async def execute(message):
+    if bool(strtobool(os.getenv('CHANNEL_LIMITED'))) and str(message.channel.id) == os.getenv('CHANNEL_ID'):
+        await parseMessageAddEmoji(message)
+    elif not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
+        await parseMessageAddEmoji(message)
