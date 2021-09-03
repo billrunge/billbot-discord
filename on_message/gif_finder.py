@@ -57,11 +57,10 @@ async def parseMessage(message):
             await message.channel.send(gif_url)
 
 async def execute(message):
-    await parseMessage(message)
-    # if bool(strtobool(os.getenv('CHANNEL_LIMITED'))) and str(message.channel.id) == os.getenv('CHANNEL_ID'):
-    #     await parseMessage(message)
-    # elif not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
-    #     await parseMessage(message)
+    if bool(strtobool(os.getenv('CHANNEL_LIMITED'))) and str(message.channel.id) == os.getenv('CHANNEL_ID'):
+        await parseMessage(message)
+    elif not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
+        await parseMessage(message)
 
 
 
