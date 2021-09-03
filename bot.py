@@ -12,11 +12,12 @@ client = discord.Client()
 @client.event
 async def on_message(message):
 
-    list_modules=os.listdir('on_message')
+    dir = 'on_message'
+    list_modules=os.listdir(dir)
     list_modules.remove('__init__.py')
     for module_name in list_modules:
         if module_name.split('.')[-1]=='py':
-            foo = SourceFileLoader(module_name, f'on_message/{module_name}').load_module()
-            await foo.execute(message)
+            module = SourceFileLoader(module_name, f'{dir}/{module_name}').load_module()
+            await module.execute(message)
 
 client.run(os.getenv('TOKEN'))
