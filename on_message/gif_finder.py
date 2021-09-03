@@ -20,8 +20,12 @@ async def getGifFromGiphy(word):
     with urllib.request.urlopen(f'{url}?{params}') as response:
         data = json.loads(response.read())
         data = data["data"]
-        data = data[0]
-    return (data["embed_url"])
+        if len(data) > 0:
+            data = data[0]
+            return (data["embed_url"])
+        else:
+            return
+        
 
 def isUniqueChars(string):
     freq = Counter(string)
