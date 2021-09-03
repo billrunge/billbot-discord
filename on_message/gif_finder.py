@@ -51,7 +51,9 @@ async def parseMessage(message):
     giphy_word = getLongestWordWithDistinctLetters(split_message)
 
     if len(giphy_word) >= int(os.getenv('MIN_WORD_LENGTH')) and len(giphy_word) <= int(os.getenv('MAX_WORD_LENGTH')):
-        await message.channel.send(await getGifFromGiphy(giphy_word))
+        gif_url = await getGifFromGiphy(giphy_word)
+        if len(gif_url) > 5:
+            await message.channel.send(gif_url)
 
 async def execute(message):
     await parseMessage(message)
