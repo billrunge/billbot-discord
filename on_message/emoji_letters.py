@@ -54,7 +54,7 @@ def getLongestWordWithDistinctLetters(word_array):
             longest_length = len(word)
     return longest_word    
 
-async def parseMessageAddEmoji(message):
+async def execute(message):
     split_message = message.content.split()
     emoji_word = getLongestWordWithDistinctLetters(split_message)
     if len(emoji_word) >= int(os.getenv('MIN_WORD_LENGTH')) and len(emoji_word) <= int(os.getenv('MAX_WORD_LENGTH')):
