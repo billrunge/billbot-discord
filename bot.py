@@ -17,8 +17,8 @@ async def on_message(message):
     # elif ('OBJECTION' in message.content.upper()) and not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
     #     await execute(message)
 
-    emoji_letters.execute(message)
-    objection.execute(message)
+    await emoji_letters.execute(message)
+    await objection.execute(message)
 
     # if bool(strtobool(os.getenv('CHANNEL_LIMITED'))) and str(message.channel.id) == os.getenv('CHANNEL_ID'):
     #     await on_message.emoji_letters.execute(message)
