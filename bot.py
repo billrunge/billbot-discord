@@ -68,9 +68,15 @@ async def parseMessageAddEmoji(message):
 
 @client.event
 async def on_message(message):
+    if ('OBJECTION' in message.content.upper()) and bool(strtobool(os.getenv('CHANNEL_LIMITED'))) and str(message.channel.id) == os.getenv('CHANNEL_ID'):
+        await message.channel.send(file=discord.File('img/objection.gif'))
+    elif ('OBJECTION' in message.content.upper()) and not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
+        await message.channel.send(file=discord.File('img/objection.gif'))
+
     if bool(strtobool(os.getenv('CHANNEL_LIMITED'))) and str(message.channel.id) == os.getenv('CHANNEL_ID'):
         await parseMessageAddEmoji(message)
-    if not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
+    elif not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
         await parseMessageAddEmoji(message)
+
 
 client.run(os.getenv('TOKEN'))
