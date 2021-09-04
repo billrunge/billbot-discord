@@ -20,7 +20,7 @@ async def billbotExecute(message, all_modules, channel_modules):
             for channel_module in channel_modules.find({'channel_id':  message.channel.id}):
                 if module_name == channel_module["module_name"]:
                     module_name += ': enabled'
-                modules += f'{module_name} \n'
+            modules += f'{module_name} \n'
         await message.channel.send(modules)
     if ('ENABLE' in message.content.upper()):
         word_array = message.content.split()
