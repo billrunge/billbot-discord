@@ -15,13 +15,15 @@ async def getCatPicUrl():
 
     with urllib.request.urlopen(url) as response:
         data = json.loads(response.read())
+        data = data[0]
         if len(data) > 0:
             return (data["url"])
         else:
             return
 
 async def execute(message):
-
-    url = await getCatPicUrl()
-    if len(url) > 5:
-        await message.channel.send(url)
+    word_array = message.content.split()
+    if word_array[0].upper() == '!SPONGEBOB':
+        url = await getCatPicUrl()
+        if len(url) > 5:
+            await message.channel.send(url)
