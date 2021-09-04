@@ -16,7 +16,7 @@ async def getAffirmation():
     with urllib.request.urlopen(url) as response:
         data = json.loads(response.read())
         if len(data) > 0:
-            return data
+            return data["affirmation"]
         else:
             return
 
