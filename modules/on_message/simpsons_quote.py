@@ -28,4 +28,4 @@ async def execute(message):
         if data is not None:
             await message.channel.send(f'{data["image"]}')
             await message.channel.send(f'{data["quote"]} \n' +
-                                        f'-{data["character"]} \n')
+                                        f'- {data["character"]} \n')
