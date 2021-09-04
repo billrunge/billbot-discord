@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from collections import Counter
 import urllib
 import json
+import pymongo
 
 load_dotenv()
 client = discord.Client()
