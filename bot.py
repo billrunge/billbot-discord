@@ -1,7 +1,6 @@
 # bot.py
 import os
 import discord
-import pymongo
 from on_message import * 
 from dotenv import load_dotenv
 from importlib.machinery import SourceFileLoader
@@ -12,9 +11,7 @@ client = discord.Client()
 # if os.getenv('bop') == None:
 #     print("test")
 
-def database():
-    dbclient = pymongo.MongoClient(os.getenv('MONGO_DB_CONNECTION_STRING'))
-    db = dbclient.test
+
 
 @client.event
 async def on_message(message):
