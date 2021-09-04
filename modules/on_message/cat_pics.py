@@ -23,7 +23,7 @@ async def getCatPicUrl():
 
 async def execute(message):
     word_array = message.content.split()
-    if word_array[0].upper() == '!SPONGEBOB':
+    if word_array[0].upper() == '!CAT':
         url = await getCatPicUrl()
         if len(url) > 5:
             await message.channel.send(url)
