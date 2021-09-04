@@ -26,6 +26,6 @@ async def execute(message):
     if word_array[0].upper() == '!SIMPSONS':
         data = await getSimpsonsData()
         if data is not None:
-            await message.channel.send(f'{data["image"]} \n' +
-                                        f'{data["quote"]} \n' +
-                                        f'-{data["quote"]} \n')
+            await message.channel.send(f'{data["image"]}')
+            await message.channel.send(f'{data["quote"]} \n' +
+                                        f'-{data["character"]} \n')
