@@ -72,9 +72,5 @@ async def messageToAscii(message):
                 ascii_image += f'`{row}`\n'
         await message.channel.send(ascii_image)
 
-async def execute(message):    
-    if bool(strtobool(os.getenv('CHANNEL_LIMITED'))) and str(message.channel.id) == os.getenv('CHANNEL_ID'):
-        await messageToAscii(message)        
-    elif not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
-        await messageToAscii(message)
-        
+async def execute(message):
+    await messageToAscii(message)
