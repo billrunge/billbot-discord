@@ -22,7 +22,7 @@ async def getBoredData():
 
 async def execute(message):
     word_array = message.content.split()
-    if ('BORED' in message.content.upper()):
+    if ("I'M BORED" in message.content.upper()):
         data = await getBoredData()
         if data is not None:
             await message.channel.send(f"Bored? You should {data['activity']}")
