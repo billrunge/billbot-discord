@@ -42,7 +42,7 @@ async def on_message(message):
                 for channel_module in channel_modules.find():
                     if module_name == channel_modules["module_name"]:
                         module_name += ': Enabled'
-            await message.channel.send(module_name)
+                await message.channel.send(module_name)
         if ('ENABLE'in message.content.upper()):
             word_array = message.content.split()
             for word in word_array:
