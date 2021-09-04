@@ -24,6 +24,7 @@ async def execute(message):
                     output_text += c.upper()
                     uppercase = True
             output_text += ' '
+            i += 1
 
         await message.channel.send(file=discord.File(img))
         await message.channel.send(output_text)
