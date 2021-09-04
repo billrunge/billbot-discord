@@ -14,14 +14,14 @@ dbname = get_database()
 async def billbotExecute(message, all_modules, channel_modules):
 
     if ('FEATURES' in message.content.upper()):
+        modules = ''
         for module in all_modules.find():
-            modules = ''
             module_name = module["name"].rstrip('.py')
             for channel_module in channel_modules.find({'channel_id':  message.channel.id}):
                 if module_name == channel_module["module_name"]:
                     module_name += ': enabled'
                 modules += f'{module_name} \n'
-            await message.channel.send(modules)
+        await message.channel.send(modules)
     if ('ENABLE' in message.content.upper()):
         word_array = message.content.split()
         for word in word_array:
