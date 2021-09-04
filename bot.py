@@ -38,7 +38,11 @@ async def on_message(message):
     if (str(message.content[0:8]).upper() == '!BILLBOT' ):
         if ('FEATURES' in message.content.upper()):
             for module in all_modules.find():
-                await message.channel.send(module["name"].rstrip('.py'))
+                module_name = module["name"].rstrip('.py')
+                for channel_module in channel_modules.find():
+                    if module_name == channel_modules["module_name"]:
+                        module_name += ': Enabled'
+            await message.channel.send(module_name)
         if ('ENABLE'in message.content.upper()):
             word_array = message.content.split()
             for word in word_array:
