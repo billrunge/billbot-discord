@@ -64,7 +64,4 @@ async def parseMessageAddEmoji(message):
 
 
 async def execute(message):
-    if bool(strtobool(os.getenv('CHANNEL_LIMITED'))) and str(message.channel.id) == os.getenv('CHANNEL_ID'):
-        await parseMessageAddEmoji(message)
-    elif not bool(strtobool(os.getenv('CHANNEL_LIMITED'))):
-        await parseMessageAddEmoji(message)
+    await parseMessageAddEmoji(message)
