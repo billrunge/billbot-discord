@@ -2,6 +2,7 @@
 import os
 import discord
 from discord import channel
+from discord.ext import commands
 from modules.on_message import *
 from dotenv import load_dotenv
 from importlib.machinery import SourceFileLoader
@@ -9,8 +10,11 @@ from database import get_database
 from billbot import billbotExecute
 
 load_dotenv()
-client = discord.Client()
+#client = discord.Client()
 dbname = get_database()
+bot = commands.Bot(command_prefix='!')
+all_modules = dbname["all_modules"]
+channel_modules = dbname["channel_modules"]
 
 
 def loadModules():
@@ -32,14 +36,17 @@ def loadModules():
 
 loadModules()
 
+@bot.command(name='billbot')
+async def billbot(message):
+    await billbotExecute(message, all_modules, channel_modules)
+    
 
-@client.event
+
+@bot.listen('on_message')
 async def on_message(message):
-    all_modules = dbname["all_modules"]
-    channel_modules = dbname["channel_modules"]
 
-    if (str(message.content[0:8]).upper() == '!BILLBOT'):
-        await billbotExecute(message, all_modules, channel_modules)
+    # if (str(message.content[0:8]).upper() == '!BILLBOT'):
+    #     await billbotExecute(message, all_modules, channel_modules)
     for module_object in all_modules.find():
         module_name = module_object["name"]
         type = module_object["type"]
@@ -48,4 +55,4 @@ async def on_message(message):
                 module_name, f'modules/{type}/{module_name}').load_module()
             await module.execute(message)
 
-client.run(os.getenv('TOKEN'))
+bot.run(os.getenv('TOKEN'))
