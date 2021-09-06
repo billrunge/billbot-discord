@@ -36,14 +36,16 @@ def loadModules():
 
 loadModules()
 
-@bot.command(name='billbot')
-async def billbot(message):
+@bot.command(pass_context=True)
+async def billbot(ctx):
+    message = ctx.message
     await billbotExecute(message, all_modules, channel_modules)
     
 
 
 @bot.listen('on_message')
 async def on_message(message):
+    print (message.content)
 
     # if (str(message.content[0:8]).upper() == '!BILLBOT'):
     #     await billbotExecute(message, all_modules, channel_modules)

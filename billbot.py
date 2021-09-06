@@ -40,12 +40,12 @@ async def billbotExecute(message, all_modules, channel_modules):
                         {'module_name': module_name, 'channel_id':  message.channel.id})
     if ('HELP' in message.content.upper()):
 
-        await message.channel.send('Thank you for using Billbot \n' +
-                                    'To see all features available and their enabled status: \n' +
-                                    '`!BILLBOT features`\n' +
-                                    'To enable a feature for the current channel: \n' +
-                                    '`!BILLBOT enable <feature name>` \n' +
-                                    'To disable a feature for the current channel: \n' +
-                                    '`!BILLBOT disable <feature name>`')
+        await message.channel.send('__**Thank you for using Billbot**__\n' +
+                                    '```diff\n- To see all features available and their enabled status--\n```\n' +
+                                    '```fix\n!BILLBOT features\n```\n' +
+                                    '```diff\n- To enable a feature for the current channel--\n```\n' +
+                                    '```fix\n!BILLBOT enable <feature name>\n```\n' +
+                                    '```diff\n- To disable a feature for the current channel--\n```\n' +
+                                    '```fix\n!BILLBOT disable <feature name>\n```')
 
 
