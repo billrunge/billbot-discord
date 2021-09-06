@@ -8,5 +8,5 @@ load_dotenv()
 objection_img = './img/objection.gif'
 
 async def execute(message):
-
-    await message.channel.send(file=discord.File(objection_img))
+    if ("OBJECTION!" in message.content.upper()):
+        await message.channel.send(file=discord.File(objection_img))
